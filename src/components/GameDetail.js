@@ -4,8 +4,15 @@ import { motion } from 'framer-motion';
 //Redux
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+//Media Resizing
 import { smallImage } from '../util';
+//Images
+import playstation from '../img/playstation.svg';
+import steam from '../img/steam.svg';
+import xbox from '../img/xbox.svg';
+import nintendo from '../img/nintendo.svg';
+import apple from '../img/apple.svg';
+import gamepad from '../img/gamepad.svg';
 
 const GameDetail = ({ pathId }) => {
   const history = useHistory();
@@ -18,6 +25,31 @@ const GameDetail = ({ pathId }) => {
       history.push('/');
     }
   };
+
+  //GET PLATFORM IMAGES
+  const getPlatform = (platform) => {
+    switch (platform) {
+      case 'PlayStation 4':
+        return playstation;
+      case 'PlayStation 5':
+        return playstation;
+      case 'Xbox Series S/X':
+        return xbox;
+      case 'Xbox S':
+        return xbox;
+      case 'Xbox One':
+        return xbox;
+      case 'PC':
+        return steam;
+      case 'Nintendo Switch':
+        return nintendo;
+      case 'iOS':
+        return apple;
+      default:
+        return gamepad;
+    }
+  };
+
   //Data
   const { screen, game, isLoading } = useSelector((state) => state.detail);
   return (
@@ -34,7 +66,11 @@ const GameDetail = ({ pathId }) => {
                 <h3>Platforms</h3>
                 <Platforms>
                   {game.platforms.map((platform) => (
-                    <h3 key={platform.platform.id}>{platform.platform.name}</h3>
+                    <img
+                      key={platform.platform.id}
+                      src={getPlatform(platform.platform.name)}
+                      title={platform.platform.name}
+                      alt={platform.platform.name}></img>
                   ))}
                 </Platforms>
               </Info>
