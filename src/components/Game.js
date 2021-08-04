@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import moment from 'moment';
 //Styling and Animation
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -26,6 +27,10 @@ const Game = ({ name, released, image, id }) => {
     // document.body.style.overflow = 'hidden';
     dispatch(loadDetail(id));
   };
+
+  //reformat release date
+  released = moment(released).format('MMMM Do, YYYY');
+
   return (
     <StyledGame
       layoutId={stringPathId}
